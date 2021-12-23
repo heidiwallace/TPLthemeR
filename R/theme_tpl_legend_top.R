@@ -1,17 +1,17 @@
 #' Customize a ggplot theme
 #'
-#' This function sets a custom theme in line with the TPL style guide for visualizations made with ggplot. This function does not have any pre-sets for a plot legend. It can be layered on to any ggplot visualization just like a built-in theme.
+#' This function sets a custom theme in line with the TPL style guide for visualizations made with ggplot. This sets a legend horizontally across the top of the plot. It can be layered on to any ggplot visualization just like a built-in theme.
 #'
 #' If any trouble loading fonts, install and load the following package:
 #' install.packages("extrafont")
 #' library(extrafont)
 #'
-#' @return A layer to be added to a ggplot visualization that modifies non-data features
+#' @return
 #' @export
 
-#define theme_tpl() function
+#define theme_tpl_legend_top() function
 
-theme_tpl <- function(){
+theme_tpl_legend_top <- function(){
 
   ggplot2::theme_classic() %+replace% #modifying the built-in ggplot theme
 
@@ -32,7 +32,14 @@ theme_tpl <- function(){
       axis.line.x.bottom = element_line(color = "gray"),
 
       #caption elements
-      plot.caption = element_text(hjust = 0, size = 12, color = "gray30")
+      plot.caption = element_text(hjust = 0, size = 12, color = "gray30"),
+
+      #legend elements
+      legend.position = "top",
+      legend.justification = "left",
+      legend.title = element_blank(),
+      legend.direction = "horizontal",
+      legend.text = element_text(size = 12, color = "gray30")
 
     )
 

@@ -1,0 +1,95 @@
+---
+title: "Introduction"
+date: "`r format(Sys.time(), '%B %d, %Y, %H:%M')`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(TPLthemeR)
+library(ggplot2)
+library(tidyverse)
+```
+
+
+This is a brief guide to using the `TPLthemeR` package, which provides themes and colors for customizing ggplot visualizations using TPL's style guide. 
+
+The package currently provides three custom themes that can be added to ggplot visualizations in the same way that `ggplot2`'s built-in themes are layered onto plots.
+
+`theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends.
+
+```{r}
+p <- 
+  diamonds %>% 
+  ggplot(aes(cut, price)) +
+  geom_col() +
+  labs(title = "Prices of diamonds by cut",
+       caption = "Here is a sample caption")
+
+p + theme_tpl()
+```
+
+
+The package also provides two built-in functions called `scale_fill_discrete_tpl()` and `scale_fill_continuous_tpl()` that can be layered on to provide branded coloring. These functions work just like the built-in `ggplot` functions `scale_fill_discrete()` and `scale_fill_continuous()` and accept the same arguments. See `?scale_fill_continuous_tpl` for the two additional arguments that this function requires.
+
+Note also that the `theme_tpl()` function can be used in conjunction with typical `theme()` layers. If wishing to override settings in `theme_tpl()` using `theme()`, `theme()` must follow `theme_tpl()`.
+
+```{r}
+diamonds %>% 
+  ggplot(aes(cut, price, fill = cut)) +
+  geom_col() +
+  labs(title = "Prices of diamonds by cut",
+       caption = "Here is a sample caption") + 
+  scale_fill_discrete_tpl() +
+  theme_tpl() +
+  theme(legend.position = "none")
+```
+
+```{r}
+g <- 
+  ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_tile()
+
+g + scale_fill_continuous_tpl('teal', reverse = T)
+
+```
+
+
+
+
+TPL colors can also be called by the function `tpl_colors()`. This function creates a vector of named color hex codes. The colors and their codes are shown below.
+
+```{r,echo=FALSE}
+cols <- tpl_colors()
+n_seq <- seq_along(cols)
+image(n_seq, 1, as.matrix(n_seq), col = cols,
+      xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n",
+      main = "The People Lab Colors")
+text(n_seq, 1, cols, col = "white", srt = 90)
+```
+
+
+A use case for this function is setting a single color or set of colors in a plot.
+
+```{r}
+colors <- tpl_colors()
+
+diamonds %>% 
+  ggplot(aes(cut, price)) +
+  geom_col(fill = colors[['orange']]) +
+  labs(title = "Prices of diamonds by cut",
+       caption = "Here is a sample caption") +
+  theme_tpl()
+```
+
+

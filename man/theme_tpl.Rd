@@ -7,10 +7,12 @@
 theme_tpl()
 }
 \value{
-
+A layer to be added to a ggplot visualization that modifies non-data features
 }
 \description{
-This function sets a custom theme for visualizations made with ggplot in line with the TPL style guide
+This function sets a custom theme in line with the TPL style guide for visualizations made with ggplot. This function does not have any pre-sets for a plot legend. It can be layered on to any ggplot visualization just like a built-in theme.
+}
+\details{
 If any trouble loading fonts, install and load the following package:
 install.packages("extrafont")
 library(extrafont)
