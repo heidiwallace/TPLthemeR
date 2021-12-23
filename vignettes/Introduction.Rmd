@@ -3,14 +3,10 @@ title: "Introduction to TPLthemeR"
 author: "Heidi Wallace"
 date: "`r format(Sys.time(), '%B %d, %Y, %H:%M')`"
 output: 
-  html_document:
-    keep_md: true
+  rmarkdown::github_document:
     toc: true
     toc_depth: 3
-vignette: >
-  %\VignetteIndexEntry{Introduction}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+
 ---
 
 ```{r, include = FALSE}
