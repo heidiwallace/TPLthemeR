@@ -1,5 +1,6 @@
 ---
 title: "Introduction to TPLthemeR"
+author: "Heidi Wallace"
 date: "`r format(Sys.time(), '%B %d, %Y, %H:%M')`"
 output: 
   rmarkdown::html_vignette:
@@ -28,14 +29,24 @@ library(ggplot2)
 library(tidyverse)
 ```
 
+### Installation
 
 This is a brief guide to using the `TPLthemeR` package, which provides themes and colors for customizing ggplot visualizations using TPL's style guide. 
+
+The package can be installed to your R library directly from GitHub using RStudio with the following commands:
+
+```{r, eval=FALSE}
+install.packages("devtools") #only if you do not already have devtools installed
+devtools::install_github("heidiwallace/TPLthemeR")
+```
+
+<br><br>
 
 ### Plot layers
 
 The package currently provides three custom themes that can be added to ggplot visualizations in the same way that `ggplot2`'s built-in themes are layered onto plots. The custom themes are `theme_tpl()`, `theme_tpl_legend_top()`, and `theme_tpl_legend_right()`.
 
-`theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually.
+`theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually. The additional themes provide customized settings for legends placed either at the top of the plot (underneath the title) or to the right of the chart.
 
 ```{r}
 #plot with default ggplot2 theme
@@ -87,7 +98,9 @@ g <-
   ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   geom_tile()
 
-g + scale_fill_continuous_tpl('teal', reverse = T)
+g + 
+  theme_tpl_legend_right() +
+  scale_fill_continuous_tpl('teal', reverse = T)
 
 ```
 

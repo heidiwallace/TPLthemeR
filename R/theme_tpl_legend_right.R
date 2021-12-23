@@ -35,7 +35,7 @@ theme_tpl_legend_right <- function(){
       plot.caption = element_text(hjust = 0, size = 12, color = "gray30"),
 
       #legend elements
-      legend.title = element_blank(),
+      legend.title = element_text(size = 12, color = "gray30"),
       legend.text = element_text(size = 12, color = "gray30")
 
     )
