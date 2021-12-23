@@ -3,7 +3,8 @@ title: "Introduction to TPLthemeR"
 author: "Heidi Wallace"
 date: "`r format(Sys.time(), '%B %d, %Y, %H:%M')`"
 output: 
-  rmarkdown::html_vignette:
+  html_document:
+    keep_md: true
     toc: true
     toc_depth: 3
 vignette: >
