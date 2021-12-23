@@ -1,7 +1,10 @@
 ---
-title: "Introduction"
+title: "Introduction to TPLthemeR"
 date: "`r format(Sys.time(), '%B %d, %Y, %H:%M')`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{Introduction}
   %\VignetteEngine{knitr::rmarkdown}
@@ -11,7 +14,11 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8, 
+  fig.height = 6, 
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
@@ -24,11 +31,14 @@ library(tidyverse)
 
 This is a brief guide to using the `TPLthemeR` package, which provides themes and colors for customizing ggplot visualizations using TPL's style guide. 
 
-The package currently provides three custom themes that can be added to ggplot visualizations in the same way that `ggplot2`'s built-in themes are layered onto plots.
+### Plot layers
 
-`theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends.
+The package currently provides three custom themes that can be added to ggplot visualizations in the same way that `ggplot2`'s built-in themes are layered onto plots. The custom themes are `theme_tpl()`, `theme_tpl_legend_top()`, and `theme_tpl_legend_right()`.
+
+`theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually.
 
 ```{r}
+#plot with default ggplot2 theme
 p <- 
   diamonds %>% 
   ggplot(aes(cut, price)) +
@@ -36,13 +46,26 @@ p <-
   labs(title = "Prices of diamonds by cut",
        caption = "Here is a sample caption")
 
+p
+```
+
+```{r}
+#plot with custom TPL theme
 p + theme_tpl()
 ```
 
 
-The package also provides two built-in functions called `scale_fill_discrete_tpl()` and `scale_fill_continuous_tpl()` that can be layered on to provide branded coloring. These functions work just like the built-in `ggplot` functions `scale_fill_discrete()` and `scale_fill_continuous()` and accept the same arguments. See `?scale_fill_continuous_tpl` for the two additional arguments that this function requires.
+<br><br>
 
-Note also that the `theme_tpl()` function can be used in conjunction with typical `theme()` layers. If wishing to override settings in `theme_tpl()` using `theme()`, `theme()` must follow `theme_tpl()`.
+### Setting colors using plot layers
+
+The package also provides two built-in functions called `scale_fill_discrete_tpl()` and `scale_fill_continuous_tpl()`. These can be layered on to provide branded coloring. These functions work just like the built-in `ggplot` functions `scale_fill_discrete()` and `scale_fill_continuous()` and they accept the same arguments. 
+
+See `?scale_fill_continuous_tpl` for the two additional arguments that this function requires.
+
+Note also that the `theme_tpl()` function can be used in conjunction with typical `theme()` layers. If you wish to override any settings in `theme_tpl()`, `theme()` must follow the `theme_tpl()` layer.
+
+Example with discrete colors:
 
 ```{r}
 diamonds %>% 
@@ -55,6 +78,10 @@ diamonds %>%
   theme(legend.position = "none")
 ```
 
+<br><br>
+
+Example with continuous colors:
+
 ```{r}
 g <- 
   ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
@@ -64,10 +91,11 @@ g + scale_fill_continuous_tpl('teal', reverse = T)
 
 ```
 
+<br><br>
 
+### Setting colors manually
 
-
-TPL colors can also be called by the function `tpl_colors()`. This function creates a vector of named color hex codes. The colors and their codes are shown below.
+TPL colors can also be called using the function `tpl_colors()`. This function creates a vector of named color hex codes. The colors and their codes are shown below.
 
 ```{r,echo=FALSE}
 cols <- tpl_colors()
@@ -75,9 +103,10 @@ n_seq <- seq_along(cols)
 image(n_seq, 1, as.matrix(n_seq), col = cols,
       xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n",
       main = "The People Lab Colors")
-text(n_seq, 1, cols, col = "white", srt = 90)
+text(n_seq, 1, paste(names(cols), cols, sep = "\n"), col = "white", srt = 0)
 ```
 
+<br><br>
 
 A use case for this function is setting a single color or set of colors in a plot.
 
@@ -93,3 +122,10 @@ diamonds %>%
 ```
 
 
+### References
+
+* <a href="http://rpubs.com/mclaire19/ggplot2-custom-themes">Learning to create custom themes in ggplot</a>
+
+* <a href="https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2">Creating corporate colour palettes for ggplot2</a>
+
+* <a href="https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html">Making your first R package</a>
