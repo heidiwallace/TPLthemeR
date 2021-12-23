@@ -1,18 +1,19 @@
+---
+title: "Introduction to TPLthemeR"
+author: "Heidi Wallace"
+date: "December 23, 2021, 14:08"
+output: 
+  html_document:
+    keep_md: true
+    toc: true
+    toc_depth: 3
 
-# TPLthemeR
+---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.width = 8, 
-  fig.height = 6, 
-  message = FALSE,
-  warning = FALSE
-)
-```
 
-```{r setup}
+
+
+```r
 library(TPLthemeR)
 library(ggplot2)
 library(tidyverse)
@@ -24,7 +25,8 @@ This is a brief guide to using the `TPLthemeR` package, which provides themes an
 
 The package can be installed to your R library directly from GitHub using RStudio with the following commands:
 
-```{r, eval=FALSE}
+
+```r
 install.packages("devtools") #only if you do not already have devtools installed
 devtools::install_github("heidiwallace/TPLthemeR")
 ```
@@ -37,7 +39,8 @@ The package currently provides three custom themes that can be added to ggplot v
 
 `theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually. The additional themes provide customized settings for legends placed either at the top of the plot (underneath the title) or to the right of the chart.
 
-```{r}
+
+```r
 #plot with default ggplot2 theme
 p <- 
   diamonds %>% 
@@ -49,10 +52,15 @@ p <-
 p
 ```
 
-```{r}
+![](README_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+
+
+```r
 #plot with custom TPL theme
 p + theme_tpl()
 ```
+
+![](README_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 
 <br><br>
@@ -67,7 +75,8 @@ Note also that the `theme_tpl()` function can be used in conjunction with typica
 
 Example with discrete colors:
 
-```{r}
+
+```r
 diamonds %>% 
   ggplot(aes(cut, price, fill = cut)) +
   geom_col() +
@@ -78,11 +87,14 @@ diamonds %>%
   theme(legend.position = "none")
 ```
 
+![](README_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+
 <br><br>
 
 Example with continuous colors:
 
-```{r}
+
+```r
 g <- 
   ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   geom_tile()
@@ -90,8 +102,9 @@ g <-
 g + 
   theme_tpl_legend_right() +
   scale_fill_continuous_tpl('teal', reverse = T)
-
 ```
+
+![](README_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 <br><br>
 
@@ -99,20 +112,14 @@ g +
 
 TPL colors can also be called using the function `tpl_colors()`. This function creates a vector of named color hex codes. The colors and their codes are shown below.
 
-```{r,echo=FALSE}
-cols <- tpl_colors()
-n_seq <- seq_along(cols)
-image(n_seq, 1, as.matrix(n_seq), col = cols,
-      xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n",
-      main = "The People Lab Colors")
-text(n_seq, 1, paste(names(cols), cols, sep = "\n"), col = "white", srt = 0)
-```
+![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 <br><br>
 
 A use case for this function is setting a single color or set of colors in a plot.
 
-```{r}
+
+```r
 colors <- tpl_colors()
 
 diamonds %>% 
@@ -122,6 +129,8 @@ diamonds %>%
        caption = "Here is a sample caption") +
   theme_tpl()
 ```
+
+![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 
 ### References
