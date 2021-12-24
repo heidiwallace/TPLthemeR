@@ -13,5 +13,5 @@ scale_fill_discrete_tpl(...)
 A ggplot layer that fills discrete scales with brand colors
 }
 \description{
-Function that sets custom TPL brand color in discrete-valued plots. It works just like the built-in ggplot layer scale_fill_discrete()
+Function that sets custom TPL brand fill in discrete-valued plots. It works just like the built-in ggplot layer scale_fill_discrete()
 }
