@@ -1,7 +1,7 @@
 ---
 title: "Introduction to TPLthemeR"
 author: "Heidi Wallace"
-date: "December 23, 2021, 16:05"
+date: "December 29, 2021, 17:49"
 output: 
   html_document:
     keep_md: true
@@ -14,7 +14,6 @@ output:
 
 
 ```r
-library(TPLthemeR)
 library(ggplot2)
 library(tidyverse)
 ```
@@ -23,13 +22,23 @@ library(tidyverse)
 
 This is a brief guide to using the `TPLthemeR` package, which provides themes and colors for customizing ggplot visualizations using TPL's style guide. 
 
-The package can be installed to your R library directly from GitHub using RStudio with the following commands:
+The package can be installed to your R library directly from GitHub using the following commands in RStudio:
 
 
 ```r
-install.packages("devtools") #only if you do not already have devtools installed
-devtools::install_github("heidiwallace/TPLthemeR")
+install.packages("devtools") #devtools allows installation directly from github; only run this command if you do not already have devtools installed
+
+devtools::install_github("heidiwallace/TPLthemeR") #install the package to your R library
 ```
+
+
+```r
+library(TPLthemeR) #load the library
+```
+
+<br>
+
+Note: If you run into trouble installing the `devtools` package, you may need to download Xcode (on Mac) or Rtools (on Windows) first. See <a href="https://www.r-project.org/nosvn/pandoc/devtools.html">here</a> for more details or feel free to contact me for troubleshooting! 
 
 <br><br>
 
@@ -37,7 +46,7 @@ devtools::install_github("heidiwallace/TPLthemeR")
 
 The package currently provides three custom themes that can be added to ggplot visualizations in the same way that `ggplot2`'s built-in themes are layered onto plots. The custom themes are `theme_tpl()`, `theme_tpl_legend_top()`, and `theme_tpl_legend_right()`.
 
-`theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually. The additional themes provide customized settings for legends placed either at the top of the plot (underneath the plot title) or to the right of the chart.
+`theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually. The additional themes called `theme_tpl_legend_top()`, and `theme_tpl_legend_right()` provide customized settings for legends placed either at the top of the plot (underneath the plot title) or to the right of the chart.
 
 
 ```r
@@ -52,7 +61,7 @@ p <-
 p
 ```
 
-![](README_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 
 ```r
@@ -60,7 +69,7 @@ p
 p + theme_tpl()
 ```
 
-![](README_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 
 <br><br>
@@ -88,7 +97,7 @@ diamonds %>%
   theme(legend.position = "none")
 ```
 
-![](README_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 <br><br>
 
@@ -107,7 +116,7 @@ g +
   scale_fill_continuous_tpl('teal', reverse = T)
 ```
 
-![](README_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 <br><br>
 
@@ -115,7 +124,7 @@ g +
 
 TPL colors can also be called using the function `tpl_colors()`. This function creates a vector of named color hex codes. The colors and their codes are shown below.
 
-![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 <br><br>
 
@@ -135,7 +144,7 @@ diamonds %>%
   theme_tpl()
 ```
 
-![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 
 ### References

@@ -166,7 +166,7 @@ pre code {
 
 <h1 class="title toc-ignore">Introduction to TPLthemeR</h1>
 <h4 class="author">Heidi Wallace</h4>
-<h4 class="date">December 23, 2021, 16:05</h4>
+<h4 class="date">December 29, 2021, 17:49</h4>
 
 </div>
 
@@ -180,21 +180,24 @@ pre code {
 </ul>
 </div>
 
-<pre class="r"><code>library(TPLthemeR)
-library(ggplot2)
+<pre class="r"><code>library(ggplot2)
 library(tidyverse)</code></pre>
 <div id="installation" class="section level3">
 <h3>Installation</h3>
 <p>This is a brief guide to using the <code>TPLthemeR</code> package, which provides themes and colors for customizing ggplot visualizations using TPL’s style guide.</p>
-<p>The package can be installed to your R library directly from GitHub using RStudio with the following commands:</p>
-<pre class="r"><code>install.packages(&quot;devtools&quot;) #only if you do not already have devtools installed
-devtools::install_github(&quot;heidiwallace/TPLthemeR&quot;)</code></pre>
+<p>The package can be installed to your R library directly from GitHub using the following commands in RStudio:</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;) #devtools allows installation directly from github; only run this command if you do not already have devtools installed
+
+devtools::install_github(&quot;heidiwallace/TPLthemeR&quot;) #install the package to your R library</code></pre>
+<pre class="r"><code>library(TPLthemeR) #load the library</code></pre>
+<p><br></p>
+<p>Note: If you run into trouble installing the <code>devtools</code> package, you may need to download Xcode (on Mac) or Rtools (on Windows) first. See <a href="https://www.r-project.org/nosvn/pandoc/devtools.html">here</a> for more details or feel free to contact me for troubleshooting!</p>
 <p><br><br></p>
 </div>
 <div id="plot-layers" class="section level3">
 <h3>Plot layers</h3>
 <p>The package currently provides three custom themes that can be added to ggplot visualizations in the same way that <code>ggplot2</code>’s built-in themes are layered onto plots. The custom themes are <code>theme_tpl()</code>, <code>theme_tpl_legend_top()</code>, and <code>theme_tpl_legend_right()</code>.</p>
-<p><code>theme_tpl()</code> customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually. The additional themes provide customized settings for legends placed either at the top of the plot (underneath the plot title) or to the right of the chart.</p>
+<p><code>theme_tpl()</code> customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually. The additional themes called <code>theme_tpl_legend_top()</code>, and <code>theme_tpl_legend_right()</code> provide customized settings for legends placed either at the top of the plot (underneath the plot title) or to the right of the chart.</p>
 <pre class="r"><code>#plot with default ggplot2 theme
 p &lt;- 
   diamonds %&gt;% 
