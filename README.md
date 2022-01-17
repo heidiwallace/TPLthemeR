@@ -1,7 +1,7 @@
 ---
 title: "Introduction to TPLthemeR"
 author: "Heidi Wallace"
-date: "January 10, 2022, 17:26"
+date: "January 17, 2022, 14:44"
 output: 
   html_document:
     keep_md: true
@@ -15,7 +15,7 @@ output:
 
 ### Installation & Setup
 
-This is a brief guide to using the `TPLthemeR` package, which provides themes and colors for customizing ggplot visualizations using TPL's style guide. 
+This is a brief guide to using the `TPLthemeR` package, which provides themes and colors for customizing `ggplot2` visualizations using TPL's style guide. 
 
 
 ##### Install the package
@@ -29,6 +29,19 @@ install.packages("devtools") #devtools allows installation directly from github;
 devtools::install_github("heidiwallace/TPLthemeR") #install the package to your R library
 ```
 
+<br>
+
+**Note**: If you run into trouble installing the `devtools` package, you may need to download Xcode (on Mac) or Rtools (on Windows) first, then re-run these commands. See <a href="https://www.r-project.org/nosvn/pandoc/devtools.html">here</a> for more details or let me know if I can help troubleshoot! 
+
+
+<br><br>
+
+### Plotting with the custom theme
+
+The package currently provides three custom themes that can be added to ggplot visualizations in the same way that `ggplot2`'s built-in themes are layered onto plots. The custom theme functions are `theme_tpl()`, `theme_tpl_legend_top()`, and `theme_tpl_legend_right()`.
+
+`theme_tpl()` customizes the plot grid and fonts. This function can be used in conjunction with the typical `theme()` syntax for additional customization. The themes called `theme_tpl_legend_top()` and `theme_tpl_legend_right()` differ only in offering customized settings for legends. Themes with legends are demonstrated in a later section.
+
 
 ```r
  #load the packages
@@ -36,54 +49,6 @@ library(TPLthemeR)
 library(ggplot2)
 library(tidyverse)
 ```
-
-<br>
-
-**Note**: If you run into trouble installing the `devtools` package, you may need to download Xcode (on Mac) or Rtools (on Windows) first. See <a href="https://www.r-project.org/nosvn/pandoc/devtools.html">here</a> for more details or let me know if I can help troubleshoot! 
-
-<br>
-
-##### Install the font to your device
-
-Next, download the Open Sans font family from <a href="https://fonts.google.com/specimen/Open+Sans#standard-styles">the developer webpage</a>. Unzip the downloaded folder, then follow the instructions to import the new font into your system for <a href="https://www.pcworld.com/article/394991/how-to-install-fonts-in-windows-10.html"> Windows</a> or <a href="https://support.apple.com/guide/font-book/install-and-validate-fonts-fntbk1000/mac">Mac</a>. 
-
-<br>
-
-##### Register fonts with R
-
-Before using the package, you'll also need to install the <a href="https://github.com/wch/extrafont">extrafonts</a> package to register the font being used in this package with R. Below are the commands to install the `extrafonts` package and register the fonts installed on your device with R. You only need to register the fonts once per device, and R will always have access to them. See the `extrafonts` github page for more details about this package.
-
-
-```r
-install.packages('extrafont')
-library(extrafont)
-
-font_import() #this command recognizes all the fonts loaded onto your computer and makes them accessible to R - may take a few minutes to run
-
-loadfonts() #registers the imported fonts with R
-```
-
-<br>
-
-##### Troubleshooting
-
-There does seem to be an issue with another required package which caused the `font_import()` function to return the following message: "No FontName. Skipping." If this occurs on your device, you can <a href="https://stackoverflow.com/questions/61204259/how-can-i-resolve-the-no-font-name-issue-when-importing-fonts-into-r-using-ext">fix it</a> by first downgrading the Rttf2pt1 package (requires Xcode or Rtools) and then running `font_import()` again. Here are the commands:
-
-
-```r
-remotes::install_version("Rttf2pt1", version = "1.3.8")
-extrafont::font_import()
-extrafont::loadfonts()
-```
-
-
-<br><br>
-
-### Plotting with custom theme
-
-The package currently provides three custom themes that can be added to ggplot visualizations in the same way that `ggplot2`'s built-in themes are layered onto plots. The custom theme functions are `theme_tpl()`, `theme_tpl_legend_top()`, and `theme_tpl_legend_right()`.
-
-`theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually using the typical `theme()` syntax. The additional themes called `theme_tpl_legend_top()`, and `theme_tpl_legend_right()` provide customized settings for legends placed either at the top of the plot (underneath the plot title) or to the right of the chart.
 
 
 ```r
@@ -98,7 +63,7 @@ p <-
 p
 ```
 
-![](README_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 
 ```r
@@ -106,13 +71,14 @@ p
 p + theme_tpl()
 ```
 
-![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 
-<br><br>
+<br>
 
+Note also that the `theme_tpl()` function can be used in conjunction with typical `theme()` layers to adjust settings. If you wish to override any settings in `theme_tpl()`, such as font appearance, `theme()` must follow the `theme_tpl()` layer.
 
-Note also that the `theme_tpl()` function can be used in conjunction with typical `theme()` layers to adjust settings. If you wish to override any settings in `theme_tpl()`, `theme()` must follow the `theme_tpl()` layer.
+<br>
 
 
 ```r
@@ -124,7 +90,7 @@ p +
         plot.caption = element_text(face = "italic"))
 ```
 
-![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 <br><br>
 
@@ -151,10 +117,13 @@ diamonds %>%
         axis.title.x = element_blank())
 ```
 
-![](README_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
-<br><br>
+<br>
 
+It's important to note that there only five colors in the custom palette, so if you have more than five discrete categories, ggplot will revert to its default colors to accommodate the additional categories. 
+
+<br>
 
 
 
@@ -170,7 +139,49 @@ g +
   scale_fill_continuous_tpl('teal', reverse = T)
 ```
 
+![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+
+
+<br><br>
+
+### Adding legends
+
+`theme_tpl_legend_top()` and `theme_tpl_legend_right()` are layers to that apply the custom TPL theme to legends. Use `theme_tpl_legend_top()` to set the legend underneath the title and `theme_tpl_legend_right()` to set the legend to the right of the plot.
+
+
+```r
+#a plot with right legend
+diamonds %>% 
+  group_by(color, cut) %>% 
+  summarise(price = mean(price)) %>% 
+  ggplot(aes(color, price, fill = cut)) +
+  geom_col(position = "dodge") +
+  labs(title = "Prices of diamonds by color and cut",
+       caption = "Here is a sample caption") +
+  theme_tpl_legend_right() +
+  scale_fill_discrete_tpl()
+```
+
+![](README_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+
+<br>
+
+
+```r
+#a plot with top legend
+diamonds %>% 
+  group_by(color, cut) %>% 
+  summarise(price = mean(price)) %>% 
+  ggplot(aes(color, price, fill = cut)) +
+  geom_col(position = "dodge") +
+  labs(title = "Prices of diamonds by color and cut",
+       caption = "Here is a sample caption") +
+  theme_tpl_legend_top() +
+  scale_fill_discrete_tpl()
+```
+
 ![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+
 
 <br><br>
 
@@ -180,15 +191,26 @@ TPL colors can also be called using the function `tpl_colors()`. This function c
 
 ![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
-<br><br>
+<br>
 
-A use case for this function is setting a single color or set of colors in a plot.
+A single color's hex code can be called using the name.
 
 
 ```r
 #create a vector of color hex codes
 colors <- tpl_colors()
 
+colors[['darkblue']]
+#> [1] "#233D4D"
+```
+
+
+<br>
+
+A use case for this function is setting a single color or set of colors in a plot.
+
+
+```r
 #plot using a hex code from the vector
 diamonds %>% 
   ggplot(aes(cut, price)) +
@@ -198,8 +220,10 @@ diamonds %>%
   theme_tpl()
 ```
 
-![](README_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
+
+<br><br>
 
 ### References
 
@@ -208,3 +232,5 @@ diamonds %>%
 * <a href="https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2">Creating corporate colour palettes for ggplot2</a>
 
 * <a href="https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html">Making your first R package</a>
+
+* <a href="https://github.com/yixuan/showtext/">Showtext package</a>

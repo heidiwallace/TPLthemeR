@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 
 ### Installation & Setup
 
-This is a brief guide to using the `TPLthemeR` package, which provides themes and colors for customizing ggplot visualizations using TPL's style guide. 
+This is a brief guide to using the `TPLthemeR` package, which provides themes and colors for customizing `ggplot2` visualizations using TPL's style guide. 
 
 
 ##### Install the package
@@ -44,11 +44,11 @@ devtools::install_github("heidiwallace/TPLthemeR") #install the package to your 
 
 <br><br>
 
-### Plotting with custom theme
+### Plotting with the custom theme
 
 The package currently provides three custom themes that can be added to ggplot visualizations in the same way that `ggplot2`'s built-in themes are layered onto plots. The custom theme functions are `theme_tpl()`, `theme_tpl_legend_top()`, and `theme_tpl_legend_right()`.
 
-`theme_tpl()` customizes the plot grid and fonts. It does not provide any customization for legends, though additional customization can be layered on manually using the typical `theme()` syntax. The additional themes called `theme_tpl_legend_top()`, and `theme_tpl_legend_right()` provide customized settings for legends placed either at the top of the plot (underneath the plot title) or to the right of the chart. These are demonstrated in a later section.
+`theme_tpl()` customizes the plot grid and fonts. This function can be used in conjunction with the typical `theme()` syntax for additional customization. The themes called `theme_tpl_legend_top()` and `theme_tpl_legend_right()` differ only in offering customized settings for legends. Themes with legends are demonstrated in a later section.
 
 ```{r}
  #load the packages
@@ -75,10 +75,11 @@ p + theme_tpl()
 ```
 
 
-<br><br>
+<br>
 
+Note also that the `theme_tpl()` function can be used in conjunction with typical `theme()` layers to adjust settings. If you wish to override any settings in `theme_tpl()`, such as font appearance, `theme()` must follow the `theme_tpl()` layer.
 
-Note also that the `theme_tpl()` function can be used in conjunction with typical `theme()` layers to adjust settings. If you wish to override any settings in `theme_tpl()`, `theme()` must follow the `theme_tpl()` layer.
+<br>
 
 ```{r}
 #plot with custom TPL theme & adjustments
@@ -118,8 +119,7 @@ diamonds %>%
 
 It's important to note that there only five colors in the custom palette, so if you have more than five discrete categories, ggplot will revert to its default colors to accommodate the additional categories. 
 
-<br><br>
-
+<br>
 
 
 ```{r}
@@ -138,7 +138,7 @@ g +
 
 <br><br>
 
-### Using legends
+### Adding legends
 
 `theme_tpl_legend_top()` and `theme_tpl_legend_right()` are layers to that apply the custom TPL theme to legends. Use `theme_tpl_legend_top()` to set the legend underneath the title and `theme_tpl_legend_right()` to set the legend to the right of the plot.
 
@@ -155,7 +155,7 @@ diamonds %>%
   scale_fill_discrete_tpl()
 ```
 
-<br><br>
+<br>
 
 ```{r}
 #a plot with top legend
@@ -169,7 +169,6 @@ diamonds %>%
   theme_tpl_legend_top() +
   scale_fill_discrete_tpl()
 
-ggsave("test.png")
 ```
 
 
@@ -188,7 +187,7 @@ image(n_seq, 1, as.matrix(n_seq), col = cols,
 text(n_seq, 1, paste(names(cols), cols, sep = "\n"), col = "white", srt = 0)
 ```
 
-<br><br>
+<br>
 
 A single color's hex code can be called using the name.
 
@@ -200,7 +199,7 @@ colors[['darkblue']]
 ```
 
 
-<br><br>
+<br>
 
 A use case for this function is setting a single color or set of colors in a plot.
 
@@ -225,4 +224,4 @@ diamonds %>%
 
 * <a href="https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html">Making your first R package</a>
 
-* 
+* <a href="https://github.com/yixuan/showtext/">Showtext package</a>

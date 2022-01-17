@@ -18,7 +18,7 @@ theme_tpl <- function(){
     ggplot2::theme(
 
       #text elements
-      text = ggplot2::element_text(family = "Oswald", face = "plain"),
+      text = ggplot2::element_text(family = "Open Sans", face = "plain"),
       plot.title = ggplot2::element_text(size = 18, color = "gray30", hjust = 0, vjust = 0),
       plot.subtitle = ggplot2::element_text(size = 14, color = "gray30", hjust = 0, vjust = 0),
       axis.text = ggplot2::element_text(size = 16, color = "gray30"),
