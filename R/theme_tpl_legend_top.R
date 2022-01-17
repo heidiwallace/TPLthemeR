@@ -2,16 +2,15 @@
 #'
 #' This function sets a custom theme in line with the TPL style guide for visualizations made with ggplot. This sets a legend horizontally across the top of the plot. It can be layered on to any ggplot visualization just like a built-in theme.
 #'
-#' If any trouble loading fonts, install and load the following package:
-#' install.packages("extrafont")
-#' library(extrafont)
-#'
-#' @return
+#' @return A layer to be added to a ggplot visualization that modifies non-data features
 #' @export
 
 #define theme_tpl_legend_top() function
 
 theme_tpl_legend_top <- function(){
+
+  sysfonts::font_add_google("Open Sans", "Open Sans") #add the font from the web
+  showtext::showtext_auto() #tell R to use showtext to render text
 
   ggplot2::theme_classic() %+replace% #modifying the built-in ggplot theme
 

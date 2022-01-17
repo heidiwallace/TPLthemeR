@@ -4,14 +4,15 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Heidi", "Wallace", , "heidi_wallace@berkeley.edu", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Provides themes and colors for customizing ggplot visualizations using TPL's style guide.
+Description: Provides font, themes, and colors for customizing ggplot visualizations using TPL's style guide.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports:
-  ggplot2
+  ggplot2,
+  showtext
 Suggests: 
     rmarkdown,
     knitr
