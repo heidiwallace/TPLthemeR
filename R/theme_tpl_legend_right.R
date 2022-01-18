@@ -9,9 +9,6 @@
 
 theme_tpl_legend_right <- function(){
 
-  #sysfonts::font_add_google("Open Sans", "Open Sans") #add the font from the web
-  #showtext::showtext_auto() #tell R to use showtext to render texts
-
   ggplot2::theme_classic() %+replace% #modifying the built-in ggplot theme
 
     ggplot2::theme(
