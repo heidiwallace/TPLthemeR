@@ -1,7 +1,7 @@
 ---
 title: "Introduction to TPLthemeR"
 author: "Heidi Wallace"
-date: "January 17, 2022, 14:44"
+date: "January 19, 2022, 12:04"
 output: 
   html_document:
     keep_md: true
@@ -11,6 +11,16 @@ output:
 ---
 
 
+```r
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 8, 
+  fig.height = 6, 
+  message = FALSE,
+  warning = FALSE
+)
+```
 
 
 ### Installation & Setup
@@ -44,7 +54,7 @@ The package currently provides three custom themes that can be added to ggplot v
 
 
 ```r
- #load the packages
+#load the packages
 library(TPLthemeR)
 library(ggplot2)
 library(tidyverse)
@@ -73,10 +83,13 @@ p + theme_tpl()
 
 ![](README_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
+<br>
+
+Note that attaching the `TPLthemeR` package using the `library` command is required for the fonts to display properly. Using the `TPLthemeR::theme_tpl()` method of calling functions without attaching the package using `library(TPLthemeR)` may behave unpredictably with fonts.
 
 <br>
 
-Note also that the `theme_tpl()` function can be used in conjunction with typical `theme()` layers to adjust settings. If you wish to override any settings in `theme_tpl()`, such as font appearance, `theme()` must follow the `theme_tpl()` layer.
+Note also that the `theme_tpl()` function can be used in conjunction with `ggplot2`'s built-in <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">`theme()`</a> layers to override settings. To do this, be sure that the `theme()` layer follows the `theme_tpl()` layer.
 
 <br>
 
@@ -91,6 +104,28 @@ p +
 ```
 
 ![](README_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+
+<br>
+
+Font sizes have been optimized for exporting to .png files and displaying in slide shows. They should display reasonably well in Rmd outputs too, but you may need to adjust the figure height and width settings using the `knitr::opts_chunk$set()` function (see the code at the start of this guide for an example). 
+
+Pro tip: If you want to override some settings in the `theme_tpl` function and easily apply that to multiple plots, save your settings into a variable that can be layered on to any `ggplot2` visualization, as follows.
+
+
+```r
+#save ggplot layers to a variable
+new_theme <- 
+  theme_tpl() +
+  theme(axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 11),
+        plot.caption = element_text(face = "italic"))
+
+#plot using variable as layer
+p +
+  new_theme
+```
+
+![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 <br><br>
 
@@ -117,7 +152,7 @@ diamonds %>%
         axis.title.x = element_blank())
 ```
 
-![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 <br>
 
@@ -139,7 +174,7 @@ g +
   scale_fill_continuous_tpl('teal', reverse = T)
 ```
 
-![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 
 <br><br>
@@ -162,7 +197,7 @@ diamonds %>%
   scale_fill_discrete_tpl()
 ```
 
-![](README_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
 <br>
 
@@ -180,7 +215,7 @@ diamonds %>%
   scale_fill_discrete_tpl()
 ```
 
-![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 
 <br><br>
@@ -189,7 +224,7 @@ diamonds %>%
 
 TPL colors can also be called using the function `tpl_colors()`. This function creates a vector of named color hex codes. The colors and their codes are shown below.
 
-![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 <br>
 
@@ -220,12 +255,12 @@ diamonds %>%
   theme_tpl()
 ```
 
-![](README_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 
 <br><br>
 
-### References
+### Resources
 
 * <a href="http://rpubs.com/mclaire19/ggplot2-custom-themes">Learning to create custom themes in ggplot</a>
 

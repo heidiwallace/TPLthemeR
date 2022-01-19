@@ -10,7 +10,7 @@ output:
 
 ---
 
-```{r, include = FALSE}
+```{r}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -51,7 +51,7 @@ The package currently provides three custom themes that can be added to ggplot v
 `theme_tpl()` customizes the plot grid and fonts. This function can be used in conjunction with the typical `theme()` syntax for additional customization. The themes called `theme_tpl_legend_top()` and `theme_tpl_legend_right()` differ only in offering customized settings for legends. Themes with legends are demonstrated in a later section.
 
 ```{r}
- #load the packages
+#load the packages
 library(TPLthemeR)
 library(ggplot2)
 library(tidyverse)
@@ -74,10 +74,13 @@ p
 p + theme_tpl()
 ```
 
+<br>
+
+Note that attaching the `TPLthemeR` package using the `library` command is required for the fonts to display properly. Using the `TPLthemeR::theme_tpl()` method of calling functions without attaching the package using `library(TPLthemeR)` may behave unpredictably with fonts.
 
 <br>
 
-Note also that the `theme_tpl()` function can be used in conjunction with typical `theme()` layers to adjust settings. If you wish to override any settings in `theme_tpl()`, such as font appearance, `theme()` must follow the `theme_tpl()` layer.
+Note also that the `theme_tpl()` function can be used in conjunction with `ggplot2`'s built-in <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">`theme()`</a> layers to override settings. To do this, be sure that the `theme()` layer follows the `theme_tpl()` layer.
 
 <br>
 
@@ -89,6 +92,25 @@ p +
         axis.text.y = element_text(size = 11),
         plot.caption = element_text(face = "italic"))
   
+```
+
+<br>
+
+Font sizes have been optimized for exporting to .png files and displaying in slide shows. They should display reasonably well in Rmd outputs too, but you may need to adjust the figure height and width settings using the `knitr::opts_chunk$set()` function (see the code at the start of this guide for an example). 
+
+Pro tip: If you want to override some settings in the `theme_tpl` function and easily apply that to multiple plots, save your settings into a variable that can be layered on to any `ggplot2` visualization, as follows.
+
+```{r}
+#save ggplot layers to a variable
+new_theme <- 
+  theme_tpl() +
+  theme(axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 11),
+        plot.caption = element_text(face = "italic"))
+
+#plot using variable as layer
+p +
+  new_theme
 ```
 
 <br><br>
@@ -216,7 +238,7 @@ diamonds %>%
 
 <br><br>
 
-### References
+### Resources
 
 * <a href="http://rpubs.com/mclaire19/ggplot2-custom-themes">Learning to create custom themes in ggplot</a>
 
